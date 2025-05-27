@@ -1,5 +1,10 @@
 name: Deploy to GitHub Pages
 
+# tell GH to grant write perms to contents & pages
+permissions:
+  contents: write      # allow pushing commits
+  pages: write         # allow updating Pages branch
+
 on:
   push:
     branches: [ main ]
@@ -7,6 +12,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -14,5 +20,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./       # the folder containing index.html
+          publish_dir: ./       # folder to publish
           publish_branch: gh-pages
